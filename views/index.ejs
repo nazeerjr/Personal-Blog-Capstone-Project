@@ -1,0 +1,74 @@
+<%- include("partials/header.ejs") %>
+   
+
+    <h1>Welcome to the Home Page of Mohammed Nazeer's Blog</h1>
+    <% if (postSubmitted.length >0){ %>
+
+        
+
+        <div> <center><strong>  All posts  </strong></center></div> 
+        <div class="before">
+            
+            <div class="after">
+                
+                <% postSubmitted.forEach((post,index) => {%>
+                    <div> <strong>Post Number : </strong>  #<%= index+1 %></div>
+                    <div> <strong>Name:</strong>  <%= post.fname %></div>
+                    <div> <strong>Title:</strong>  <%= post.ftitle %></div>
+                    <div> <strong>Description:</strong>  <%= post.ftext %></div>
+                    <center>
+                    <form action="/edit/<%=index%> " method="get">
+                        <button type="submit"  > edit </button>
+                    </form>
+                    <form action="/delete/ <%= index %>" method="post">
+                        <button type="submit" onclick="return confirm('are you sure you want to delete this post ')" > delete  </button>
+                    </form></center>
+                    <hr>
+                <% }); %>
+            </div>
+         </div>
+         <section id="create">
+            <div>
+                <h1 >Want to Create a New Post..?</h1>
+            </div>
+
+            <div class="container">
+            
+                <form action="/create" method="post">
+                    <input type="submit" value="Click here">
+                </form>
+        </div>
+        </section>
+        <br>
+        <br>
+        <section id="viewall">
+
+            <div class="container">
+                <form action="/view" method="get">
+                   
+                    <input type="submit" value="View All Posts ">
+                </form>
+        </div>
+        </section>
+    <% }else{ %>
+        <section id="create">
+
+            <div class="container">
+                <form action="/create" method="post">
+                   
+                    <input type="submit" value="Create New Post ">
+                </form>
+        </div>
+        <br><br>
+        </section>
+        <section id="viewall">
+
+            <div class="container">
+                <form action="/view" method="get"> 
+                    <input type="submit" value="View All Posts ">
+                </form>
+        </div>
+        </section>
+        
+    <%}%>
+<%- include("partials/footer.ejs") %>
